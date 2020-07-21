@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ShoppingCar.Models.ShoppingCarModel>
+
+@{
+    ViewBag.Title = "ShoppingCarList";
+}
+
+<h2>購物清單</h2>
+
+
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qry)
+        </th>
+        <th>
+            小計
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qry)
+            </td>
+            <td>
+                @(item.Price * item.Qry)
+            </td>
+            <td>
+
+                <a href="@Url.Action("ShoppingCarAddQty")?Id=@item.ProductID" class="btn btn-info">+1</a>
+                <a href="@Url.Action("ShoppingCarSubQty")?Id=@item.ProductID" class="btn btn-warning">-1</a>
+                <a href="@Url.Action("ShoppingCarDelete")?Id=@item.ProductID" class="btn btn-danger">刪除此項目</a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+<h2>訂單資訊</h2>
+<form method="post" action="@Url.Action("OrderCreate","Member")">
+    <div class="panel panel-success">
+        <div class="panel-heading">請填寫收件人資訊</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="fReceiver">收件人姓名</label>
+                <input type="text" class="form-control" id="ReceiverName" name="ReceiverName" required>
+            </div>
+            <div class="form-group">
+                <label for="fReceiverPhone">收件人手機號碼</label>
+                <input type="text" pattern=’\d{4}[-]\d{6}’ class="form-control" id="ReceiverPhone" name="ReceiverPhone" required>
+                <span style="color:lightskyblue;">Ex：0912-345678</span>
+            </div>
+            <div class="form-group">
+                <label for="fReceiverAddress">收件人住址</label>
+                <input type="text" class="form-control" id="ReceiverAddress" name="ReceiverAddress" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="訂購">
+            </div>
+        </div>
+    </div>
+</form>
