@@ -13,15 +13,31 @@ namespace ShoppingCar.Controllers
         
         public ActionResult Register()
         {
-            return View(new MemberModel());
+            return View(new MemberViewModel());
         }
         [HttpPost]
-        public ActionResult Register(MemberModel model)
+        public ActionResult Register(MemberViewModel model)
         {
+
             var result = MemberService.Create(model);
 
             ViewBag.Result = result;
 
+            return View(model);
+        }
+        [Authorize]
+        public ActionResult MemberEdit()
+        {
+            string account = User.Identity.Name;
+            var e = MemberService.GetAccount(account);
+            return View(e);
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult MemberEdit(MemberViewModel model)
+        {
+            var result = MemberService.MemberEdit(model);
+            ViewBag.Result = result;
             return View(model);
         }
 
@@ -100,6 +116,12 @@ namespace ShoppingCar.Controllers
             string account = User.Identity.Name;
             var orderlist = OrderServise.OrderList(account);
             return View(orderlist);
+        }
+        [Authorize]
+        public ActionResult OrderDetailsList(int orderid)
+        {
+            var orderdetailslist = OrderServise.orderDetailsList(orderid);
+            return View(orderdetailslist);
         }
     }
 

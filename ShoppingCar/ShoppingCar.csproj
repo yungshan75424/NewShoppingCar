@@ -143,6 +143,7 @@
     <Compile Include="Da.Repository\BaseRepository.cs" />
     <Compile Include="Da.Repository\BaseConnectRepository.cs" />
     <Compile Include="Enums\MemberLevelEnum.cs" />
+    <Compile Include="ViewModels\MemberViewModel .cs" />
     <Compile Include="Models\OrderDetailsModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\ShoppingCarModel.cs" />
@@ -205,6 +206,8 @@
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\ShoppingCarList.cshtml" />
     <Content Include="Views\Member\OrderList.cshtml" />
+    <Content Include="Views\Member\OrderDetailsList.cshtml" />
+    <Content Include="Views\Member\MemberEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

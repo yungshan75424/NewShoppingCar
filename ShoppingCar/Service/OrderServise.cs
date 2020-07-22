@@ -71,7 +71,10 @@ namespace ShoppingCar.Service
         {
             return OrderRepository.GetOrderList(account);
         }
-
+        public List<OrderDetailsModel> orderDetailsList(int orderid)
+        {
+            return OrderDetailsRepository.GetOrderDetailsList(orderid);
+        }
 
     }
 }

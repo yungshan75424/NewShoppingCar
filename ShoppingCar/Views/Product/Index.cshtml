@@ -72,13 +72,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductTypeID)
             </td>
-
+*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             <button class="btn-default" onclick="Delete(@(item.Id ))">刪除</button>
         </td>
-    *@
+
     @if (string.IsNullOrWhiteSpace(User.Identity.Name) == false)
     {
         <td>
