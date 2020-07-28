@@ -1,7 +1,8 @@
 ﻿@model ShoppingCar.Models.MemberViewModel
-
+@using ShoppingCar.Models;
 @{
-    ViewBag.Title = "MemberEdit";
+    ViewBag.Title = "會員資料更新";
+    ResultModel<MemberViewModel> result = ViewBag.Result;
 }
 
 <h2>MemberEdit</h2>
@@ -9,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>MemberViewModel</h4>
         <hr />
@@ -67,9 +68,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="更新" class="btn btn-default" />
             </div>
         </div>
+    </div>
+}
+@if (result != null)
+{
+    <div class="alert @(result.IsSuccess ? "alert-success" : "alert-danger")">
+        @(result.Message)
     </div>
 }
 

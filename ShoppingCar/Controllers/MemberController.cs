@@ -20,9 +20,7 @@ namespace ShoppingCar.Controllers
         {
 
             var result = MemberService.Create(model);
-
             ViewBag.Result = result;
-
             return View(model);
         }
         [Authorize]
@@ -38,7 +36,9 @@ namespace ShoppingCar.Controllers
         {
             var result = MemberService.MemberEdit(model);
             ViewBag.Result = result;
-            return View(model);
+            string account = User.Identity.Name;
+            var e = MemberService.GetAccount(account);
+            return View(e);
         }
 
         public ActionResult Login()

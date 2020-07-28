@@ -3,6 +3,7 @@ using ShoppingCar.Models;
 using ShoppingCar.Repository;
 using ShoppingCar.Utility.Extensions;
 using System;
+using System.Web.Http.Validation;
 
 namespace ShoppingCar.Service
 {
@@ -122,7 +123,7 @@ namespace ShoppingCar.Service
             var account = MemberRespoistory.GetAccount(model.Account);
             if (account == null)
             {
-                return new ResultModel
+                return new ResultModel<MemberViewModel>
                 {
                     IsSuccess = false,
                     Message = "密碼錯誤，請重新輸入"
@@ -133,30 +134,25 @@ namespace ShoppingCar.Service
                 return new ResultModel<MemberViewModel>
                 {
                     IsSuccess = false,
-                    Message = "密碼輸入兩次不一致",
-                    Model = model
+                    Message = "密碼輸入兩次不一致"
                 };
             }
             var password = GetHashString(model.Account, model.OldPassWord, account.Salt);
 
             if (account.PassWord != password)
             {
-                return new ResultModel
+                return new ResultModel<MemberViewModel>
                 {
                     IsSuccess = false,
                     Message = "舊密碼錯誤請重新輸入"
                 };
             }
-
-            MemberModel memberModel = new MemberModel
-            {
-                Account = model.Account,
-                Email = model.Email,
-                PassWord = model.PassWord,
-                RealName = model.RealName
-            };
-            MemberRespoistory.Update(memberModel);
-            return new ResultModel
+            string hashString = GetHashString(model.Account, model.PassWord, account.Salt);
+            account.PassWord = hashString;
+            account.RealName = model.RealName;
+            account.Email = model.Email;
+            MemberRespoistory.Update(account);
+            return new ResultModel<MemberViewModel>
             {
                 IsSuccess = true,
                 Message = "基本資料修改完成"
