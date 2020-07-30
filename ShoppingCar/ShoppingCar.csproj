@@ -208,9 +208,11 @@
     <Content Include="Views\Member\OrderList.cshtml" />
     <Content Include="Views\Member\OrderDetailsList.cshtml" />
     <Content Include="Views\Member\MemberEdit.cshtml" />
+    <Content Include="Views\Shared\_LayoutMemberIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
